@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google 搜索</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: #f9f9f9; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: auto; 
+            padding: 20px; 
+            background-color: white; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 8px; 
+        }
+        input[type="text"], 
+        button { 
+            border-radius: 5px; 
+            padding: 10px; 
+            width: calc(100% - 22px); 
+            margin-bottom: 10px; 
+            border: 1px solid #ccc; 
+            box-sizing: border-box; 
+        }
+        input[type="submit"], 
+        button { 
+            background-color: #4285F4; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+        }
+        input[type="submit"]:hover, 
+        button:hover { 
+            background-color: #357ae8; 
+        }
+        .hidden { 
+            display: none; 
+        }
+        .links { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+        }
+        a { 
+            margin: 0 10px; 
+            color: #4285F4; 
+            text-decoration: none; 
+        }
+        a:hover { 
+            text-decoration: underline; 
+        }
+    </style>
+</head>
+<body>
+    <div class="links">
+        <a href="#" onclick="showPage('search')">Google 搜索</a>
+        <a href="#" onclick="showPage('imageSearch')">图片搜索</a>
+        <a href="#" onclick="showPage('advancedSearch')">高级搜索</a>
+    </div>
+    <div class="container">
+        <div id="search" class="page">
+            <h1>Google 搜索</h1>
+            <form action="https://www.google.com/search" method="get">
+                <input type="text" name="q" placeholder="搜索..." required>
+                <div>
+                    <input type="submit" value="Google 搜索">
+                </div>
+            </form>
+        </div>
+        <div id="imageSearch" class="page hidden">
+            <h1>Google 图片搜索</h1>
+            <form action="https://www.google.com/search" method="GET">
+                <input type="hidden" name="tbm" value="isch">
+                <input type="text" name="q" class="search-bar" placeholder="搜索图片" required>
+                <br>
+                <button type="submit" class="search-button">搜索图片</button>
+            </form>
+            <div class="links">
+                <a href="#" onclick="showPage('search')">返回 Google 搜索</a>
+            </div>
+        </div>
+        <div id="advancedSearch" class="page hidden">
+            <h1>Google 高级搜索</h1>
+            <form action="https://www.google.com/search" method="GET">
+                <label for="all-words">以下所有字词：</label>
+                <input type="text" id="all-words" name="q" class="advanced-search-bar" placeholder="输入重要字词： 砀山鸭梨"><br>
+                <label for="exact-phrase">与以下字词完全匹配：</label>
+                <input type="text" id="exact-phrase" name="exactphrase" class="advanced-search-bar" placeholder='用引号将需要完全匹配的字词引起： "鸭梨"'><br>
+                <label for="any-words">以下任意字词：</label>
+                <input type="text" id="any-words" name="anyword" class="advanced-search-bar" placeholder='在所需字词之间添加 OR： 批发 OR 特价'><br>
+                <label for="none-words">不含以下任意字词：</label>
+                <input type="text" id="none-words" name="noneword" class="advanced-search-bar" placeholder='在不需要的字词前添加一个减号： -山大、-"刺梨"'><br>
+                <label for="number-range">数字范围：</label>
+                <input type="text" id="number-range" name="numrange" class="advanced-search-bar" placeholder='从： 10..35 斤、300..500 元、2010..2011 年'><br>
+                <button type="submit" class="advanced-search-button">高级搜索</button>
+            </form>
+            <div class="links">
+                <a href="#" onclick="showPage('search')">返回 Google 搜索</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.getElementById(page).classList.remove('hidden');
+        }
+        // 默认显示搜索页面
+        showPage('search');
+    </script>
+</body>
+</html>
